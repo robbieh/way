@@ -11,7 +11,7 @@ what commands to run? And you've left notes ... somewhere. Do you remember where
 
 `Way` has your back here.
 
-== Test it out ===
+== Test it out ==
 
 There is a https://github.com/robbieh/way/releases/tag/preview[preview release]
 but currently only for Linux amd64 systems.
