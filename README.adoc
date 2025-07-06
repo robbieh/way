@@ -11,11 +11,17 @@ what commands to run? And you've left notes ... somewhere. Do you remember where
 
 `Way` has your back here.
 
+== Test it out ===
+
+There is a https://github.com/robbieh/way/releases/tag/preview[preview release]
+but currently only for Linux amd64 systems.
+
 == Build and deploy it ==
 
+For anyone else, or people wanting to hack:
+
 You need https://github.com/babashka/babashka/releases[Babashka] for your system.
-The current version of `way` is written in Clojure and runs on Babashka. Future
-versions might be compiled with GraalVM, or perhaps with Jank.
+The current version of `way` is written in Clojure and runs on Babashka.
 
 But for now `make exe` will build it and create the executable at `artifacts/way`.
 
@@ -25,8 +31,7 @@ And `make deploy` will copy it to `~/bin`.
 
 Either `bb nrepl` or `make repl` will give you a network repl. Happy Clojuring!
 
-
-== Disclaimer ==
+=== Disclaimer ===
 
 I've put some code in to try to make this cross-platform friendly. Non-Linux
 platforms are yet untested.
@@ -58,4 +63,8 @@ Now behold! `way show all` will show your reminder and what the command is.
 The best thing is when you come back to that directory in six months, `way`
 will show your notes and remind you about your handy shortcut.
 
+== Read some more ==
 
+More details about
+https://blog.nundrum.net/posts-output/2025-06-19-the-system-wayfinder/[The System Wayfinder]
+can be found on my blob.
