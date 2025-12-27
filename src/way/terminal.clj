@@ -1,7 +1,4 @@
-(ns way.terminal
-  )
-
-(require '[babashka.tasks :as tasks])
+(ns way.terminal)
 
 ;ANSI escape codes: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 (def esc (char 27))
@@ -34,9 +31,12 @@
   (str esc "[38;5;" i "m"))
 
 (defn get-columns []
-  (->> (tasks/shell {:out :string} "tput" "cols") 
-       :out 
-       clojure.string/trim Integer/parseInt))
+  (try
+    (let [proc (.exec (Runtime/getRuntime) "tput cols")
+          _ (.waitFor proc)
+          result (slurp (.getInputStream proc))]
+      (Integer/parseInt (clojure.string/trim result)))
+    (catch Exception _ 80))) ; fallback to 80 columns
 
 (defn pos [x y]
   (str esc "[" x ";" y "H"))

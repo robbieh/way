@@ -1,10 +1,8 @@
 (ns way.edit
   (:require [clojure.java.io :as io]
             [clojure.edn :as edn]
-            [way.conf :as conf]
-            [borkdude.rewrite-edn :as redn]
-            )
-  )
+            [clojure.pprint :as pprint]
+            [way.conf :as conf]))
 
 (defn launch-editor [filename]
   (let [editor          (or (System/getenv "VISUAL") "vim")
@@ -58,9 +56,11 @@
                            (apply str))
                     clojure.lang.PersistentVector 
                        (vec newtext))
-          nodes   (redn/parse-string (slurp wayf))
+          config  (edn/read-string (slurp wayf))
+          updated-config (assoc-in config path-vec newtext)
           ]
-      (spit wayf (str (redn/assoc-in nodes path-vec newtext)))
+      (with-open [w (io/writer wayf)]
+        (pprint/pprint updated-config w))
       )
     )
   )

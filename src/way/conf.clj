@@ -5,7 +5,7 @@
 (defn find-wayf 
   "Search recursively upward for .wayf file"
   []
-  (let [cwd (fs/cwd)]
+  (let [cwd (fs/file (System/getProperty "user.dir"))]
     (loop [wd cwd]
       (cond 
         (.exists (fs/file wd ".wayf")) (fs/file wd ".wayf")
@@ -42,6 +42,5 @@
     (let [file (find-conf)
           raw  (slurp file)
           data (edn/read-string raw)]
-    data)
-    (catch java.io.FileNotFoundException nil)
-  ))
+      data)
+    (catch java.io.FileNotFoundException e nil)))
